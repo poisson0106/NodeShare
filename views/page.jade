@@ -1,4 +1,5 @@
 doctype html
+// saved from url=(0038)http://v3.bootcss.com/examples/signin/
 html(lang='zh-CN')
   head
     meta(http-equiv='Content-Type', content='text/html; charset=UTF-8')
@@ -8,6 +9,33 @@ html(lang='zh-CN')
     meta(name='description', content='')
     meta(name='author', content='')
     title Main Page
+    // Bootstrap core CSS
+    link(href='/stylesheets/bootstrap.min.css', rel='stylesheet')
+    link(href='/stylesheets/mainpage.css', rel='stylesheet')
+    script(href='text/javascript', src='/javascripts/jquery-1.11.1.min.js')
+    script(type='text/javascript' , src='/javascripts/bootstrap.min.js')
+    script(type='text/javascript' , src='/javascripts/socket.io.js')
+    script(type='text/javascript' , src='/javascripts/operate.js')
   body
-    p #{username}
-    p #{password}
+    nav.navbar.navbar-default
+      .container-fluid
+        .navbar-header
+          a.navbar-brand(href='#') NodeShare
+        ul.nav.navbar-nav.navbar-right
+          li
+            a#username #{username}
+          li
+            a(href='#') Logout
+    .container-fluid
+      .row
+        .col-sm-2
+          .panel.panel-default
+            .panel-heading Panel heading
+            ul#onlinelist.list-group
+        .col-sm-10
+          .col-sm-12.content
+          .col-sm-12.msgcontainer
+            .col-sm-10
+              textarea#msg.form-control(style='height:100px;resize:none;')
+            .col-sm-2
+              button#send.btn.btn-success.btn-lg.btn-block(type='button', style='height:100px') Send

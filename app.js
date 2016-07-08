@@ -8,7 +8,31 @@ var bodyParser = require('body-parser');
 //Router part
 var login = require('./routes/login')
 
+//Open http server and socket sever
 var app = express();
+
+// Add this part if run by node app.js
+
+// var port = normalizePort(process.env.PORT || '3000');
+// var server = app.listen(port);
+// io.on('connection', function(socket){
+//   console.log('a user connected');
+// });
+// function normalizePort(val) {
+//   var port = parseInt(val, 10);
+
+//   if (isNaN(port)) {
+//     // named pipe
+//     return val;
+//   }
+
+//   if (port >= 0) {
+//     // port number
+//     return port;
+//   }
+
+//   return false;
+// }
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

@@ -1,0 +1,19 @@
+.content{
+    width: 100%;
+    height: 500px;
+    border-width: 5px;
+    border-color: #ccc;
+    border-style: solid;
+    overflow: auto;
+    border-radius: 10px 10px 10px 10px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.msgcontainer{
+    margin-top: 10px;
+    background-color: #eee;
+    border-radius: 10px 10px 10px 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
