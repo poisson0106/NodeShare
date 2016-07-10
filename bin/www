@@ -7,6 +7,7 @@
 var app = require('../app');
 var debug = require('debug')('firstnode:server');
 var http = require('http');
+var _ = require('underscore')
 
 /**
  * Get port from environment and store in Express.
@@ -32,25 +33,35 @@ server.on('listening', onListening);
 
 //Socket part
 var io = require('socket.io').listen(server);
-var onlineList = new Array();
+global.onlineList = new Array();
 
 io.on('connection', function(socket){
   console.log('a user connected');
 
-  socket.on('disconnect', function(){
+  socket.on('disconnect', function(data){
     console.log('user disconnected');
   });
 
   //online
   socket.on('online',function(username){
-    onlineList.push(username);
-    io.emit('online',onlineList)
+    global.onlineList.push(username);
+    var back = {"name":username,"list":global.onlineList};
+    io.emit('online',back);
   });
 
   //on message
   socket.on('nmsg',function(params) {
     io.emit('rmsg',params);
-  })  
+  });
+
+  //offline
+  socket.on('offline',function(username) {
+    if(_.contains(global.onlineList , username)){
+      onlineList = _.without(global.onlineList, username);
+      var back = {"name":username,"list":global.onlineList};
+      io.emit('offline',back);
+    }
+  })
 });
 
 /**
