@@ -18,7 +18,7 @@ router.post('/submit', function(req,res,next){
   		next(err);
 	}
 	else{
-		db.all("SELECT PASSWORD AS pswd FROM USER WHERE USERNAME='"+uname+"'", function(err, rows) {
+		db.all("SELECT PASSWORD AS pswd FROM USER WHERE USERNAME=?", uname, function(err, rows) {
     		rows.forEach(function (row) {
     			console.log("row: "+row.pswd);
     			console.log("pswd: "+pswd);
@@ -34,5 +34,15 @@ router.post('/submit', function(req,res,next){
 		});
 	}
 });
+
+router.post('/register',function(req,res,next) {
+	var uname = req.param('username');
+	var pswd = req.param('password');
+	db.run("INSERT INTO USER(USERNAME,PASSWORD) VALUES($uname,$pswd)",{
+		$uname:uname,
+		$pswd:pswd
+	});
+	res.render('page',{username:uname,password:pswd});
+})
 
 module.exports = router;

@@ -9,10 +9,18 @@ $(function(){
         }
    });
 
+   
+
 
     //Offline
     $(window).unload(function(){
         socket.emit('offline',username);
+    });
+
+    //Logout
+    $("#logout").click(function (e) { 
+        socket.emit('offline',username);
+        window.location.href="http://localhost:3000/login/init";
     });
 
 
