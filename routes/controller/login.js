@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database('./nodeTest.sqlite');
+var user_dao_f = require('../dao/user_dao')
+var user_dao = new user_dao_f(db)
 
 /* GET Login page. */
 router.get('/init', function(req, res, next) {
@@ -18,8 +20,24 @@ router.post('/submit', function(req,res,next){
   		next(err);
 	}
 	else{
-		db.all("SELECT PASSWORD AS pswd FROM USER WHERE USERNAME=?", uname, function(err, rows) {
-    		rows.forEach(function (row) {
+		// db.all("SELECT PASSWORD AS pswd FROM USER WHERE USERNAME=?", uname, function(err, rows) {
+    	// 	rows.forEach(function (row) {
+    	// 		console.log("row: "+row.pswd);
+    	// 		console.log("pswd: "+pswd);
+      	// 		if(row.pswd == pswd){
+      	// 			console.log("Yes this is correct.");
+      	// 			res.render('page',{username:uname,password:pswd});
+      	// 		}
+      	// 		else{
+      	// 			console.log("No this is incorrect");
+      	// 			 res.render('login', { title: 'Login' });
+      	// 		}
+    	// 	});
+		// });
+
+		var rows = user_dao.getUser(uname);
+		if(rows != null){
+			rows.forEach(function (row) {
     			console.log("row: "+row.pswd);
     			console.log("pswd: "+pswd);
       			if(row.pswd == pswd){
@@ -31,9 +49,11 @@ router.post('/submit', function(req,res,next){
       				 res.render('login', { title: 'Login' });
       			}
     		});
-		});
+		}
+		next()
 	}
 });
+
 
 router.post('/register',function(req,res,next) {
 	var uname = req.param('username');

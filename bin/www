@@ -32,37 +32,9 @@ server.on('listening', onListening);
 
 
 //Socket part
-var io = require('socket.io').listen(server);
 global.onlineList = new Array();
-
-io.on('connection', function(socket){
-  console.log('a user connected');
-
-  socket.on('disconnect', function(data){
-    console.log('user disconnected');
-  });
-
-  //online
-  socket.on('online',function(username){
-    global.onlineList.push(username);
-    var back = {"name":username,"list":global.onlineList};
-    io.emit('online',back);
-  });
-
-  //on message
-  socket.on('nmsg',function(params) {
-    io.emit('rmsg',params);
-  });
-
-  //offline
-  socket.on('offline',function(username) {
-    if(_.contains(global.onlineList , username)){
-      onlineList = _.without(global.onlineList, username);
-      var back = {"name":username,"list":global.onlineList};
-      io.emit('offline',back);
-    }
-  })
-});
+var iof = require('../io')
+var this_io = new iof(server)
 
 /**
  * Normalize a port into a number, string, or false.

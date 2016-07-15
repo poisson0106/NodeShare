@@ -10,7 +10,9 @@
             "args": [],
             "cwd": "${workspaceRoot}",
             "preLaunchTask": null,
-            "runtimeExecutable": null,
+            //For Mac
+            // "runtimeExecutable": null,
+            "runtimeExecutable": "C:/Program Files/nodejs/node.exe",
             "runtimeArgs": [
                 "--nolazy"
             ],
