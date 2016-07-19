@@ -16,6 +16,7 @@
     "sqlite3": "latest",
     "socket.io": "latest",
     "express-session": "latest",
-    "underscore": "latest"
+    "underscore": "latest",
+    "q": "latest"
   }
 }
