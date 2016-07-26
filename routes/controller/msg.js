@@ -1,3 +1,5 @@
+var _ = require('underscore')
+
 var skt = function(socket,io){
     socket.on('disconnect', function(data){
         console.log('user disconnected');

@@ -21,9 +21,8 @@ router.post('/submit', function(req,res,next){
   		next(err);
 	}
 	else{
-
-		db.all("SELECT PASSWORD AS pswd FROM USER WHERE USERNAME=?", uname, function(err, rows) {
-    		rows.forEach(function (row) {
+		var a =user_dao.getUser(uname).then(function(rows){
+			rows.forEach(function (row) {
     			console.log("row: "+row.pswd);
     			console.log("pswd: "+pswd);
       			if(row.pswd == pswd){
@@ -32,14 +31,17 @@ router.post('/submit', function(req,res,next){
       			}
       			else{
       				console.log("No this is incorrect");
-      				 res.render('login', { title: 'Login' });
+      				res.render('login', { title: 'Login' });
       			}
     		});
-		});
+		},function(error){
+			console.log("No this is incorrect");
+      		res.render('login', { title: 'Login' });
+		})
 
-		// var rows = user_dao.getUser(uname);
-		// if(rows != null){
-		// 	rows.forEach(function (row) {
+
+		// db.all("SELECT PASSWORD AS pswd FROM USER WHERE USERNAME=?", uname, function(err, rows) {
+    	// 	rows.forEach(function (row) {
     	// 		console.log("row: "+row.pswd);
     	// 		console.log("pswd: "+pswd);
       	// 		if(row.pswd == pswd){
@@ -51,8 +53,7 @@ router.post('/submit', function(req,res,next){
       	// 			 res.render('login', { title: 'Login' });
       	// 		}
     	// 	});
-		// }
-		// next()
+		// });
 	}
 });
 

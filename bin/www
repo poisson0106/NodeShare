@@ -7,7 +7,6 @@
 var app = require('../app');
 var debug = require('debug')('firstnode:server');
 var http = require('http');
-var _ = require('underscore')
 
 /**
  * Get port from environment and store in Express.
