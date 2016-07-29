@@ -7,9 +7,13 @@ $(function(){
         if (Notification.permission !== status) {
           Notification.permission = status;
         }
-   });
+    });
 
-   
+    //Create cookie
+    var exdate=new Date()
+    exdate.setDate(exdate.getDate()+1)
+    document.cookie="uname = "+$("#username").attr("value")+";expires="+exdate.toGMTString()
+    document.cookie="pswd = "+$("#pswd").val()+";expires="+exdate.toGMTString()
 
 
     //Offline
