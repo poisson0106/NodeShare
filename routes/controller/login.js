@@ -11,7 +11,7 @@ const decipher = crypto.createDecipher('aes192', 'qy');
 
 /* GET Login page. */
 router.get('/init', function(req, res, next) {
-	if(req.cookies.pswd == ""){
+	if(req.cookies.pswd == "" || req.cookies.pswd == null){
 		console.error("The cookie file lost");
 		res.render('login', { title: 'Login' });
 	}

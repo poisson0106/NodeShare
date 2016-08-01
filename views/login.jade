@@ -11,10 +11,11 @@ html(lang='zh-CN')
     title Signin Template for Bootstrap
     // Bootstrap core CSS
     link(href='/stylesheets/bootstrap.min.css', rel='stylesheet')
+    link(href='/stylesheets/font-awesome.min.css', rel='stylesheet')
     link(href='/stylesheets/signin.css', rel='stylesheet')
     script(src='/javascripts/ie-emulation-modes-warning.js')
     script(type='text/javascript' src='/javascripts/jquery-1.11.1.min.js')
-    script(type='text/javascript' src='/javascripts/jquery.blockUI.js')
+    script(type='text/javascript' src='/javascripts/bootstrap.min.js')
     script(type='text/javascript' src='/javascripts/init.js')
   body
     .container
@@ -29,15 +30,27 @@ html(lang='zh-CN')
             input(type='checkbox', value='remember-me')
             |  Remember me
         button#sbmt.btn.btn-lg.btn-primary.col-sm-6(type='button') Sign in
-        button#rgst.btn.btn-lg.btn-default.col-sm-6(type='button') Register
-
-      #reg.col-sm-12(style="display:none")
-        form#register.form-sign(method='post', action='register')
-          h2.form-signin-heading Please Input information
-          label.sr-only(for='regName') Username
-          input#regName.form-control(type='text', placeholder='Username', required='', autofocus='',name='username')
-          label.sr-only(for='regPassword') Password
-          input#regPassword.form-control(type='password', placeholder='Password', required='',name='password')
-  
-          button#rgstsbmt.btn.btn-lg.btn-primary.col-sm-6(type='button') Register
-          button#close.btn.btn-lg.btn-default.col-sm-6(type='button') Close
+        button#rgst.btn.btn-lg.btn-default.col-sm-6(type='button',data-toggle="modal" data-target="#reg") Register
+        
+      #reg.modal.fade(role='dialog', aria-labelledby='gridSystemModalLabel')
+        .modal-dialog(role='document')
+          .modal-content
+            .modal-header
+              button.close(type='button', data-dismiss='modal', aria-label='Close')
+                span(aria-hidden='true') &times;
+              h4#gridSystemModalLabel.modal-title Please Input information
+            .modal-body
+              form#register.form-group(method='post', action='register')
+                .form-group
+                  label(for='regName') Username
+                  input#regName.form-control(type='text', placeholder='Username', required='', autofocus='',name='username')
+                .form-group
+                  label(for='regPassword') Password
+                  input#regPassword.form-control(type='password', placeholder='Password', required='',name='password')
+              
+            .modal-footer
+              button.btn.btn-default(type='button', data-dismiss='modal') Close
+              button#rgstsbmt.btn.btn-primary(type='button') submit
+          // /.modal-content
+        // /.modal-dialog
+      // /.modal

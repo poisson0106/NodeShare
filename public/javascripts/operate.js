@@ -63,7 +63,7 @@ $(function(){
     function refreshList(list){
         $("#onlinelist").html('');
         list.forEach(function(e) {
-            $("#onlinelist").append("<li class='list-group-item' id='"+e+"'>"+e+"</li>");
+            $("#onlinelist").append("<li class='list-group-item' id='"+e+"'><i class='fa fa-user fa-fw'></i>"+e+"</li>");
         }, this);
     }
 });
