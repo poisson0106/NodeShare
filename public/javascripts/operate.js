@@ -24,7 +24,7 @@ $(function(){
     //Logout
     $("#logout").click(function (e) { 
         socket.emit('offline',username);
-        window.location.href="http://localhost:3000/login/init";
+        window.location.href="http://localhost:3000/logout";
     });
 
 

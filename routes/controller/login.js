@@ -39,8 +39,6 @@ router.get('/init', function(req, res, next) {
 router.post('/submit', function(req,res,next){
 	var uname = req.param('username');
 	var pswd = req.param('password');
-	pswd = decipher.update(pswd,"hex","utf-8")
-	pswd += decipher.final('utf-8')
 
 	if(global.onlineList == uname){
 		var err = new Error('User has already online');
@@ -52,6 +50,8 @@ router.post('/submit', function(req,res,next){
 			rows.forEach(function (row) {
     			console.log("row: "+row.pswd);
     			console.log("pswd: "+pswd);
+				row.pswd = decipher.update(row.pswd,"hex","utf-8")
+				row.pswd += decipher.final('utf-8')
       			if(row.pswd == pswd){
       				console.log("Yes this is correct.");
       				res.render('page',{username:uname,password:pswd});
